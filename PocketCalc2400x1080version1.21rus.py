@@ -617,4 +617,5 @@ speedCode = format(speedCode, '.5f')
 labelTime = Label(text=f"Скорость обработки данных: {speedCode} сек.", font="arial 6 underline")
 labelTime.place(x=20, y=2050)
 #*******
+#*******
 root.mainloop()
