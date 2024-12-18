@@ -7,24 +7,18 @@ import datetime
 import calendar
 import time
 import webbrowser
-# *********************************************
+import random
+# ****************************************
 startCode = time.time()
-def timing():
-    current_time = time.strftime("%H : %M : %S")
-    clock.config(text=current_time)
-    clock.after(200, timing)
-    
-def telegrammbot(event):
-    webbrowser.open_new(r"https://t.me/PocketCombatsbot")
-
-def callback(event):
-    webbrowser.open_new(r"https://t.me/pocketcombats_chat")
-    
+# ******
 def exit2():
     choise = messagebox.askyesno("", "Вы точно хотите выйти?")
     if choise:
         root.destroy()
-        
+
+def tenba():
+    messagebox.showinfo("", "\nОтдельные слова благодарности\nхотел бы выразить игрокам:\n@Smertnay_Tenb и @Астма,\nза предоставленные формулы\nпо игре.")
+         
 def bot():
     messagebox.showinfo("", "\nПо вопросам телеграмм-бота\nписать @PocketYa")
         
@@ -32,40 +26,44 @@ def firmado():
     messagebox.showinfo("", "\nВы можете найти\nменя в телеграмме\n@Firmado")
 
 def version():
-    messagebox.showinfo("", "\nВерсия 1.21\nот 01.05.2022")
+    messagebox.showinfo("", "\nВерсия 1.24\nот 04.12.2022")
 
 def nuance():
-    messagebox.showinfo("", """Нюансы работы калькулятора:\n◦Если вы свернули калькуля-\nтор, а потом возобновили работу,\nто для активации клавиатуры\nнеобходимо один раз нажать на\nкнопку ◀ на клавиатуре\nтелефона.\n◦Погрешность при вычислении\nуровня жизни.\n◦Погрешность при вычислении\n Исцеления.""")
+    messagebox.showinfo("", """Нюансы работы калькулятора:\n◦Если вы свернули калькуля-\nтор, а потом возобновили работу,\nто для активации клавиатуры\nнеобходимо один раз нажать на\nкнопку ◀ на клавиатуре\nтелефона.\n◦Погрешность при вычислении\n Исцеления.\n◦Погрешность при вычислении\nмагического урона.""")
         
 def instruction():
-    messagebox.showinfo("", """‌◦Внимание!!! Для рассчёта \nатрибутов все поля характерис-\nтик должны быть заполнены.\nЕсли нет необходимости рассчи-\nтывать характеристику, ставим\nпросто единицу.\n◦Для "Броска щитом"\nзаполняем интуицию, живучесть\nи уровень заточки щита, если \nщит без заточки, ставим ноль.\n◦Для "Исцеления" заполняем\nуровень, интуицию, мудрость,\nурон от Света, заточку посоха,\nмин. и макс. магический урон,\nи выбираем необходимый нам\nпосох.\n◦Для рассчёта жизни и маны\nзаполняем уровень, живучесть и \nмудрость.\n◦Для рассчёта уворота и мет-\nкости заполняем уровень,\nловкость,интуицию и удачу.\n◦Для благословения оружия\nзаполняем интуицию и мудрость.""")
-# *********************************************
+    messagebox.showinfo("", """‌◦Внимание!!! Для рассчёта \nатрибутов все поля характерис-\nтик должны быть заполнены.\nЕсли нет необходимости рассчи-\nтывать характеристику, ставим\nпросто единицу.\n◦Для "Броска щитом"\nзаполняем интуицию, живучесть\nи уровень заточки щита, если \nщит без заточки, ставим ноль.\n◦Для "Исцеления" заполняем\nуровень, интуицию, мудрость,\nурон от Света, заточку посоха,\nмин. и макс. магический урон,\nи выбираем необходимый нам\nпосох.\n◦Для рассчёта жизни и маны\nзаполняем уровень, живучесть и \nмудрость.\n◦Для рассчёта уворота и мет-\nкости заполняем уровень,\nловкость,интуицию и удачу.""")
+# ****************************************
 root=Tk()
-mainmenu = Menu(root, font="Times 10 bold", activebackground="#59b5f2")
+back = "#59b5f2" # <--- Цвет кнопок
+#********
+mainmenu = Menu(root, font="Times 8 bold", activebackground= back)
 root.config(menu = mainmenu)
 #*****
-instructionmenu = Menu(mainmenu, activebackground="#59b5f2")
+instructionmenu = Menu(mainmenu, activebackground= back)
 instructionmenu.add_separator()
-instructionmenu.add_command(label="Как заполнять поля?",font="Times 9 bold", command = instruction)
+instructionmenu.add_command(label="Как заполнять поля?",font="Times 8 bold", command = instruction)
 instructionmenu.add_separator()
-instructionmenu.add_command(label="Нюанс работы калькулятора", font="Times 9 bold", command = nuance)
+instructionmenu.add_command(label="Нюанс работы калькулятора", font="Times 8 bold", command = nuance)
 #*****
-infomenu = Menu(mainmenu, activebackground="#59b5f2")
+infomenu = Menu(mainmenu, activebackground= back)
 infomenu.add_separator()
-infomenu.add_command(label="Версия программы", font="Times 9 bold", command = version)
+infomenu.add_command(label="Версия программы", font="Times 8 bold", command = version)
 infomenu.add_separator()
-infomenu.add_command(label="Об авторе", font="Times 9 bold", command = firmado)
+infomenu.add_command(label="Об авторе", font="Times 8 bold", command = firmado)
 infomenu.add_separator()
-infomenu.add_command(label="Телеграмм-бот", font="Times 9 bold", command = bot)
+infomenu.add_command(label="Телеграмм-бот", font="Times 8 bold", command = bot)
+infomenu.add_separator()
+infomenu.add_command(label="Благодарность", font="Times 8 bold", command = tenba)
 #*****
-exitmenu = Menu(mainmenu, activebackground="#59b5f2")
+exitmenu = Menu(mainmenu, activebackground= back)
 exitmenu.add_separator()
-exitmenu.add_command(label="Выход", font="Times 9 bold", command = exit2)
+exitmenu.add_command(label="Выход", font="Times 8 bold", command = exit2)
 #*****
-mainmenu.add_cascade(label="Инструкция", menu = instructionmenu)
-mainmenu.add_cascade(label=" О программе", menu = infomenu)
-mainmenu.add_cascade(label="  Выход", menu = exitmenu)
-#**********************************************
+mainmenu.add_cascade(label="   Инструкция", menu = instructionmenu)
+mainmenu.add_cascade(label="     О программе", menu = infomenu)
+mainmenu.add_cascade(label="        Выход", menu = exitmenu)
+#*****************************************
 WIDTH=1080
 HEIGHT=2400
 
@@ -106,25 +104,19 @@ prof = IntVar()
 prof.set(0)
 
 mage = Radiobutton(text="Маг", variable = prof, value = 0)
-mage.place(x=600, y=395)
+mage.place(x=600, y=430)
 
 warrior = Radiobutton(text="Воин", variable = prof, value = 1)
-warrior.place(x=600, y=465)
+warrior.place(x=600, y=500)
 
 hunter = Radiobutton(text="Охотник", variable = prof, value = 2)
-hunter.place(x=600, y=535)
+hunter.place(x=600, y=570)
 
 newbie = Radiobutton(text="Новичок", variable = prof, value = 3)
-newbie.place(x=600, y=605)
+newbie.place(x=600, y=640)
 
 stakanov = Radiobutton(text="Стаканов", variable = prof, value = 4, command = exit)
-stakanov.place(x=600, y=675)
-# Двуручное оружие союзника
-twoHanded = IntVar()
-twoHanded.set(0)
-
-twoHanded_checkbutton = Checkbutton(text="Союзник с двуруч. оружием", font="arial 7", variable = twoHanded)
-twoHanded_checkbutton.place(x=470, y=1695)
+stakanov.place(x=600, y=710)
 # Руна жизнетока
 runeLifecurrent = IntVar()
 runeLifecurrent.set(0)
@@ -143,11 +135,29 @@ staffBlessing.set(0)
 
 staffBlessing_checkbutton = Checkbutton(text="Благословение", font="arial 8", variable = staffBlessing, bd =5)
 staffBlessing_checkbutton.place(x=550, y=1385)
+# Жуткий посох
+staffCreepy = IntVar()
+staffCreepy.set(0)
+
+staffCreepy_checkbutton = Checkbutton(text="Жуткий посох", font="arial 8", variable = staffCreepy, bd = 5)
+staffCreepy_checkbutton.place(x=550, y=1450)
+# Скорость ветра
+windSpeed = IntVar()
+windSpeed.set(0)
+
+windSpeed_checkbutton = Checkbutton(text="Скорость ветра", font="arial 8", variable = windSpeed, bd = 5)
+windSpeed_checkbutton.place(x=530, y=1140)
+# Капюшон злых намерений
+evilHood = IntVar()
+evilHood.set(0)
+
+evilHood_checkbutton = Checkbutton(text="Капюшон злых нам.", font="arial 8", variable = evilHood, bd=5)
+evilHood_checkbutton.place(x=550, y=1515)
 # Бросок щита
 shieldSharp = Label (text="Заточка щита:")
 shieldSharp.place(x=20, y=900)
 # Урон броска щита
-damageShield = Label (text="Урон щита: ")
+damageShield = Label (text="Урон щита: ", font="arial 7")
 damageShield.place(x=20, y=970)
 # maxHP
 health = Label (text=": ")
@@ -157,22 +167,25 @@ urMana = Label(text=": ")
 urMana.place(x=785, y=1055)
 # Уклонение
 dodgeLabel = Label(text="Уклон/Меткость:", font = "arial 7" )
-dodgeLabel.place(x=550, y=1170)
+dodgeLabel.place(x=550, y=1200)
 # Броня
 armorLabel = Label(text="Физический урон\nуменьшен на, % :__", font="arial 7")
 armorLabel.place(x=550, y=1935)
-# УВС
-uvsLabel = Label(text="Увеличивает урон в ___ раз.", font="arial 8")
-uvsLabel.place(x=360, y=1855)
-# Благословение оружием
-blessingLabel = Label(text="Урон Светом увеличен на: __", font="arial 8")
-blessingLabel.place(x=20, y=1770)
+# Магический урон вещей
+equipmentMagicDamage = Label(text="Маг.урон с предметов экипировки: ", font="arial 8")
+equipmentMagicDamage.place(x=20, y=1590)
+# Усиление магии от рун и вещей
+amplifyMagic = Label(text="Усиление магии от рун и вещей: ", font="arial 8")
+amplifyMagic.place(x=20, y=1665)
 # Урон от света
 lightLabel = Label(text="Урон от Света: ", font="arial 8")
 lightLabel.place(x=20, y=1265)
 # Исцеление
 healingLabel = Label(text=": ")
-healingLabel.place(x=330, y=1590)
+healingLabel.place(x=330, y=1855)
+# Маг урон
+magicDamageLabel= Label(text=": ")
+magicDamageLabel.place(x=330, y=1760)
 # Заточка посоха
 staffSharpeningLabel = Label(text="Заточка\nпосоха:")
 staffSharpeningLabel.place(x=20, y=1320)
@@ -194,10 +207,9 @@ endurance = StringVar()
 wisdom = StringVar()
 luck = StringVar()
 shield = StringVar()
-
 # Сохранить/Загрузить
 def download():
-    char = [level, strength, dexterity, intuition, endurance, wisdom, luck, shield, armor, lightEntry, staffSharpeningEntry, minMagicDamageEntry, maxMagicDamageEntry]
+    char = [level, strength, dexterity, intuition, endurance, wisdom, luck, shield, armor, lightEntry, staffSharpeningEntry, minMagicDamageEntry, maxMagicDamageEntry, equipmentMagicDamageEntry, amplifyMagicEntry]
     try:
         charList = open("charList.dat", "r", encoding="utf-8")
         for i, line in enumerate(charList):
@@ -206,9 +218,9 @@ def download():
         charList.close()                       
     except:
         messagebox.showwarning("", "\nЧто-то пошло не так!")
-#*********************************************
+#*****************************************
 def saveBuild():
-    char = [level.get(), strength.get(), dexterity.get(), intuition.get(), endurance.get(), wisdom.get(), luck.get(), shield.get(), armor.get(), lightEntry.get(), staffSharpeningEntry.get(), minMagicDamageEntry.get(), maxMagicDamageEntry.get()]
+    char = [level.get(), strength.get(), dexterity.get(), intuition.get(), endurance.get(), wisdom.get(), luck.get(), shield.get(), armor.get(), lightEntry.get(), staffSharpeningEntry.get(), minMagicDamageEntry.get(), maxMagicDamageEntry.get(), equipmentMagicDamageEntry.get(), amplifyMagicEntry.get()]
     try:
         charList = open("charList.dat", "w", encoding="utf-8")
         for i in char:
@@ -218,21 +230,18 @@ def saveBuild():
     except:
         messagebox.showwarning("", "\nЧто-то пошло не так!")
     return char      
-#*******
-def uvs():
-    global uvsLabel
-    dexterity_ = int(dexterity.get())
-    uvs = format((450 + 10 * dexterity_)/(450 + dexterity_), '.2f')
-    uvsLabel["text"] = f"Увеличивает урон в {uvs} раз."
-       
+#*******      
 def dodge():
     global dodgeLabel
     level_ = int(level.get())
     dexterity_ = int(dexterity.get())
     intuition_ = int(intuition.get())
     luck_ = int(luck.get())
+    windSpeed_ = int(windSpeed.get())
     
     dodge = 100 + level_ + dexterity_ + floor(luck_ *0.2)
+    if ( windSpeed.get() == 1):
+        dodge = (100 + level_ + dexterity_ + floor(luck_ * 0.2)) +30
     accuracy = 175 + level_ + intuition_ + floor(luck_ /3)
     dodgeLabel["text"] = f"Уклон/Меткость: {dodge}/{accuracy}"
     
@@ -243,25 +252,45 @@ def armor():
     
     armorLabel["text"] = f"Физический урон\nуменьшен на, % :{armor2}"
     
-def blessingWeapon():
-    global blessingLabel
-    intuition_ = int(intuition.get())
+def wizardDamage():
+    global magicDamageLabel
+    level_ = int(level.get())
     wisdom_ = int(wisdom.get())
-    twoHanded_ = int(twoHanded.get())
-    blessing = 5 + (wisdom_ + (intuition_/2)-38)/2
-    if(blessing<=5):
-        blessing = 5
-    elif(blessing >=50):
-        blessing = 50
-    if twoHanded.get() == 1:
-        blessing = blessing + (blessing * 50)/100
-        if(blessing <=5):
-            blessing = 5
-        elif(blessing >= 75):
-            blessing = 75
+    intuition_ = int(intuition.get())
+    luck_ = int(luck.get())
+    equipmentMagicDamageEntry_ = int(equipmentMagicDamageEntry.get())
+    amplifyMagicEntry_ = int(amplifyMagicEntry.get())
+    staffSharpeningEntry_ = int(staffSharpeningEntry.get())
+    evilHood_ = int(evilHood.get())
+    staffCreepy_ = int(staffCreepy.get())
     
-    blessingLabel["text"] = f"Урон Светом увеличен на: {blessing}"
-  
+    koefWizardDamage = round((600+ intuition_ * 10)/(600 + intuition_), 1)
+    
+    minBWD = ceil(level_ /6 + wisdom_ *1.2 + intuition_ /5 + luck_ /3)
+    minEquipment = ceil(equipmentMagicDamageEntry_ * 0.9)
+    amplify = amplifyMagicEntry_ /100 +1
+    
+    minWizardDamage = trunc(((minBWD + minEquipment) * amplify) * koefWizardDamage)
+    if(evilHood.get() ==1 and staffCreepy.get()==1):
+        minWizardDamage = trunc(((minBWD +(staffSharpeningEntry_ *10) + minEquipment) * amplify) * koefWizardDamage)
+    if(evilHood.get() == 1 and staffCreepy.get() == 1 and staffSharpeningEntry.get() =="10"):
+        minWizardDamage = trunc(((minBWD + (staffSharpeningEntry_ *10 +50) + minEquipment) * amplify) * koefWizardDamage)
+    minMagicDamageEntry.delete(0, END)
+    minMagicDamageEntry.insert(0,  minWizardDamage)
+    
+    maxBWD = ceil((level_ / 4 + wisdom_ *4/3 + intuition_ /5 + luck_ *2/3 ))
+    maxEquipment = equipmentMagicDamageEntry_
+    
+    maxWizardDamage = trunc(((maxBWD + maxEquipment) * amplify) * koefWizardDamage)
+    if(evilHood.get()==1 and staffCreepy.get()==1):
+        maxWizardDamage = trunc(((maxBWD + (staffSharpeningEntry_ * 10) + maxEquipment) * amplify) * koefWizardDamage)
+    if(evilHood.get() == 1 and staffCreepy.get() == 1 and staffSharpeningEntry.get() =="10"):
+        maxWizardDamage = trunc(((maxBWD + (staffSharpeningEntry_ *10 +50) + maxEquipment) * amplify) * koefWizardDamage)
+    maxMagicDamageEntry.delete(0, END)
+    maxMagicDamageEntry.insert(0, maxWizardDamage)
+              
+    magicDamageLabel["text"] = f":{minWizardDamage}-{maxWizardDamage}"
+       
 def healing():
    global healingLabel
    level_ = int(level.get())
@@ -281,6 +310,8 @@ def healing():
        minheal = round(minheal + (minheal * (staffSharpeningEntry_ * 0.025) + minMagicDamageEntry_))
        if runeLifecurrent.get()==1:
            minheal = round(minheal + (minheal * 30)/100)
+   elif(staffHealers.get() != 1 and staffBlessing.get() != 1 and runeLifecurrent.get()==1):
+       minheal = round(minheal + (minheal * 30)/100)
 
    if staffBlessing.get() == 1:
         minheal = round(minheal + (minheal * (staffSharpeningEntry_ * 0.05) + minMagicDamageEntry_))
@@ -293,13 +324,15 @@ def healing():
        maxheal = round(maxheal + (maxheal * (staffSharpeningEntry_ * 0.025) + maxMagicDamageEntry_))
        if runeLifecurrent.get()==1:
            maxheal = round(maxheal + (maxheal * 30)/100)
+   elif(staffHealers.get() != 1 and staffBlessing.get() != 1 and runeLifecurrent.get()==1):
+       maxheal = round(maxheal + (maxheal * 30)/100)
        
    if staffBlessing.get() == 1:
         maxheal = round(maxheal + (maxheal * (staffSharpeningEntry_ * 0.05) + maxMagicDamageEntry_))
         if runeLifecurrent.get()==1:
                  maxheal = round(maxheal + (maxheal*30)/100)
                  
-   healingLabel["text"] = f": {minheal}-{maxheal}"
+   healingLabel["text"] = f":{minheal}-{maxheal}"
       
 def manaCalc():
     global urMana
@@ -334,47 +367,47 @@ def healthMax():
   
     base = floor(int(35 + level_ * 5))
 
-    maxHp = 1
+    maxHp = 0
     if prof_ == 0:
         if level_ <= 70:
             for i in range(2, level_ +1):
-                maxHp += i  
-            maxHp = floor(base + maxHp * 0.3)
-            koefVit = floor(((maxHp*endurance_)/100) - endurance_)
+                maxHp += floor(i * 0.3)   
+            maxHp = floor(base + maxHp)
+            koefVit = floor((maxHp*endurance_)/100)
             maxHp = floor(maxHp + koefVit)
         else:
             for i in range(2, level_+1):
-                maxHp += i  
-            maxHp = floor(base + maxHp * 0.55)
-            koefVit = floor(((maxHp*endurance_)/100) - endurance_)
+                maxHp += floor(i * 0.55)  
+            maxHp = floor(base + maxHp)
+            koefVit = floor((maxHp*endurance_)/100)
             maxHp = floor(maxHp + koefVit)
     
     if prof_ == 1:
         if level_ <= 70:
             for i in range(2, level_ +1):
-                maxHp += i
-            maxHp = floor(base + maxHp * 0.7)
-            koefVit = floor(((maxHp*endurance_)/100) - endurance_)
+                maxHp += floor(i * 0.7)
+            maxHp = floor(base + maxHp)
+            koefVit = floor((maxHp*endurance_)/100)
             maxHp = floor(maxHp + koefVit)
         else:
             for i in range(2, level_ +1):
-                maxHp += i
-            maxHp = floor(base + maxHp * 1.1)
-            koefVit = floor(((maxHp*endurance_)/100) - endurance_)
+                maxHp += floor(i * 1.1)
+            maxHp = floor(base + maxHp)
+            koefVit = floor((maxHp*endurance_)/100)
             maxHp = floor(maxHp + koefVit)
     
     if prof_ == 2:
         if level_ <= 70:
             for i in range(2, level_ +1):
-                maxHp += i
-            maxHp = floor(base + maxHp * 0.5)
-            koefVit = floor(((maxHp*endurance_)/100) - endurance_)
+                maxHp += floor(i * 0.5)
+            maxHp = floor(base + maxHp)
+            koefVit = floor((maxHp*endurance_)/100)
             maxHp = floor(maxHp + koefVit)
         else:
             for i in range(2, level_ +1):
-                maxHp += i
-            maxHp = floor(base + maxHp * 0.8)
-            koefVit = floor(((maxHp*endurance_)/100) - endurance_)
+                maxHp += floor(i * 0.8)
+            maxHp = floor(base + maxHp)
+            koefVit = floor((maxHp*endurance_)/100)
             maxHp = floor(maxHp + koefVit)
         
     if prof_ == 3:
@@ -390,12 +423,74 @@ def shieldThrow():
     endurance_= int(endurance.get())
     shield_ = int(shield.get())
     
-    minDamage = floor(5* (endurance_ *6 +floor(endurance_ * endurance_ /200)*4 + floor(intuition_ /5) + (shield_ * shield_ *3)))
+    minDamage = floor(5* (endurance_ *6 +floor(endurance_ * endurance_ /200)*4 + floor(intuition_ /5) + (pow(shield_, 2)*3)))
 
-    maxDamage = ceil(6* (endurance_ * 6 + floor(endurance_ * endurance_ / 200)*4 + floor(intuition_ /5) + (shield_ * shield_ *3)))
+    maxDamage = ceil(6* (endurance_ * 6 + floor(endurance_ * endurance_ / 200)*4 + floor(intuition_ /5) + (pow(shield_, 2)*3)))
     
     damageShield["text"]=f"Урон щита: {minDamage} - {maxDamage}"
 
+def protection():
+    global stunLabel
+    global blindnessLabel
+    global poisoningLabel
+    global glaciationLabel
+    global petrificationLabel
+    global burnLabel
+    global bleedingLabel
+    global dumbnessLabel
+    global curseLabel
+    endurance_ = int(endurance.get())
+    wisdom_ = int(wisdom.get())
+    luck_ = int(luck.get())
+        
+    stun = endurance_
+    if(stun >= 75):
+        stun = 75
+    stun2 = ceil(luck_ * 0.4)
+    
+    blindness = int((wisdom_ + endurance_ )/2)
+    if(blindness >= 75):
+        blindness = 75
+    blindness2 = ceil(luck_ * 0.4)
+    
+    poisoning = endurance_
+    if(poisoning >= 75):
+        poisoning = 75  
+    poisoning2 = ceil(luck_ * 0.4)
+    
+    glaciation = int(wisdom_ /2)
+    if(glaciation >= 75):
+        glaciation = 75
+    glaciation2 = ceil(luck_ * 0.4)
+    
+    petrification = int(wisdom_ /2)
+    if(petrification >= 75):
+        petrification = 75
+        
+    burn = round(wisdom_ /3)
+    if(burn >= 70):
+        burn = 70
+        
+    bleeding = endurance_
+    if(bleeding >= 75):
+        bleeding = 75
+        
+    dumbness = floor(floor(wisdom_ /2) + floor(endurance_ /4) + floor(luck_ /8))
+    if(dumbness >= 75):
+        dumbness = 75
+        
+    curse = luck_
+    
+    stunLabel["text"] = f"Защита от оглушения:       {stun}%+{stun2}"
+    blindnessLabel["text"] = f"Защита от ослепления:      {blindness}%+{blindness2}"
+    poisoningLabel["text"] = f"Защита от отравления:      {poisoning}%+{poisoning2}"
+    glaciationLabel["text"] = f"Защита от оледенения:      {glaciation}%+{glaciation2}"
+    petrificationLabel["text"] = f"Защита от окаменения:     {petrification}%"
+    burnLabel["text"] = f"Защита от ожога:                  {burn}%"
+    bleedingLabel["text"] = f"Защита от кровотечения: {bleeding}%"
+    dumbnessLabel["text"] = f"Защита от немоты:              {dumbness}%"
+    curseLabel["text"] = f"Защита от проклятия:        {curse}%"
+    
 def calculate():
     global labelAttribute
     global attribute
@@ -459,6 +554,8 @@ def clear_entry():
     staffSharpeningEntry.delete(0, END)
     minMagicDamageEntry.delete(0, END)
     maxMagicDamageEntry.delete(0, END)
+    equipmentMagicDamageEntry.delete(0, END)
+    amplifyMagicEntry.delete(0, END)
     attribute = 0
     res = 0
     damage = 0
@@ -476,6 +573,8 @@ def clear_entry():
     staffSharpeningEntry.insert(0, "0")
     minMagicDamageEntry.insert(0, "0")
     maxMagicDamageEntry.insert(0, "0")
+    equipmentMagicDamageEntry.insert(0, "0")
+    amplifyMagicEntry.insert(0, "0")
       
 def exit():
     choise = messagebox.askyesno("Выход", "Вы точно хотите выйти?")
@@ -483,63 +582,53 @@ def exit():
         root.destroy()
       
 # Кнопка Рассчитать
-startButton=Button(text="Количество атрибутов", font="arial 8", width=16 , background="#59b5f2", bd=5)
+startButton=Button(text="Количество атрибутов", font="arial 8", width=16 , background= back, bd=5)
 startButton["command"] = calculate
 startButton.place(x=20, y=175)
-#Тень Рассчитать
-#root.update()
-#shadowstartButton = Label(root, bg="black")
-#shadowstartButton.place(x=25, y=175, width = startButton.winfo_width(), height = startButton.winfo_height())
-#shadowstartButton.lower(startButton)
-
 # Кнопка Подтвердить
-enterButton = Button(text="Распределить хар-ки", font="arial 8", width=16, background="#59b5f2", bd=5)
-enterButton["command"] = calcStat
+enterButton = Button(text="Распределить хар-ки", font="arial 8", width=16, background= back, bd=5)
+enterButton["command"] = lambda: (calcStat(), protection())
 enterButton.place(x=20, y=790)
 # Кнопка Новый рассчёт
-newCalcButton = Button(text = "Новый рассчёт", font="arial 8", width=16, background="#59b5f2", bd=5)
+newCalcButton = Button(text = "Новый рассчёт", font="arial 8", width=16, background= back, bd=5)
 newCalcButton["command"]= clear_entry
 newCalcButton.place(x=550, y=790)
 # Броня
-armorButton = Button(text="Броня", font="arial 8", width=8, bg="#59b5f2", bd=5)
+armorButton = Button(text="Броня", font="arial 8", width=8, bg= back, bd=5)
 armorButton["command"]= armor
 armorButton.place(x=20, y=1935)
 # Бросок щита
-shieldThrowButton = Button(text="Бросок щита", font="arial 8", width= 16, background="#59b5f2", bd=5)
+shieldThrowButton = Button(text="Бросок щита", font="arial 8", width= 16, background= back, bd=5)
 shieldThrowButton["command"] = shieldThrow
 shieldThrowButton.place(x=20, y=1040)
 # maxHP
-maxHp = Button(text="Жизнь", font="arial 8",width = 5, background ="#59b5f2", bd=5)
+maxHp = Button(text="Жизнь", font="arial 8",width = 5, background = back, bd=5)
 maxHp["command"]= healthMax
 maxHp.place(x=550, y=900)
 # mana
-maxMana = Button(text="Мана", font="arial 8", width = 5, background ="#59b5f2", bd=5)
+maxMana = Button(text="Мана", font="arial 8", width = 5, background = back, bd=5)
 maxMana["command"] = manaCalc
 maxMana.place(x=550, y=1040)
 # Уклонение
-dodgeButton = Button(text="Уклон/Меткость", font="arial 8", width= 16, bg = "#59b5f2", bd=5)
+dodgeButton = Button(text="Уклон/Меткость", font="arial 8", width= 16, bg = back, bd=5)
 dodgeButton["command"] = dodge
 dodgeButton.place(x=20, y=1150)
-# УВС
-uvsButton = Button(text="Удар в спину", font="arial 8" , width= 8, bg = "#59b5f2", bd=5)
-uvsButton["command"] = uvs
-uvsButton.place(x=20, y=1835)
-# Благословение оружием
-blessingButton = Button(text="Благослов. оружия", font="arial 8", width =13, bg = "#59b5f2", bd=5)
-blessingButton["command"] = blessingWeapon
-blessingButton.place(x=20, y=1670)
 # Исцеление
-healingButton = Button(text="Исцеление", font="arial 8", width= 8, bg = "#59b5f2", bd=5)
+healingButton = Button(text="Исцеление", font="arial 8", width= 8, bg = back, bd=5)
 healingButton["command"] = healing
-healingButton.place(x=20, y=1570)
+healingButton.place(x=20, y=1835)
+# Маг урон
+magicDamageButton = Button(text="Маг.урон", font="arial 8", width=8, bg= back, bd=5)
+magicDamageButton["command"] = wizardDamage
+magicDamageButton.place(x=20, y=1735 )
 # Сохранить
-saveButton = Button(text="Сохранить билд", font="arial 8", width = 14, bg="#59b5f2", bd=5)
+saveButton = Button(text="Сохранить билд", font="arial 8", width = 14, bg= back, bd=5)
 saveButton["command"] = saveBuild
-saveButton.place(x=580, y=1460)
+saveButton.place(x=580, y=1735)
 # Загрузить
-downloadButton = Button(text="Загрузить билд", font="arial 8", width=14, bg="#59b5f2", bd=5)
+downloadButton = Button(text="Загрузить билд", font="arial 8", width=14, bg= back, bd=5)
 downloadButton["command"] = download
-downloadButton.place(x=580, y=1570)
+downloadButton.place(x=580, y=1835)
 # Логотип
 pocketCombats = Label(text="Калькулятор PocketCombats", font="Times 12 bold underline")
 pocketCombats.place(x=30, y=0)
@@ -595,27 +684,48 @@ minMagicDamageEntry.place(x=390, y=1420)
 maxMagicDamageEntry = Entry(width = 5, justify = CENTER, bd = 5)
 maxMagicDamageEntry.insert(0,"0")
 maxMagicDamageEntry.place(x=390, y=1500)
-# *****
-today = datetime.date.today().strftime("%d.%m.%y")
-dateNow = Label(text=f"{today}", font="times 9 bold")
-dateNow.place(x=700,y=95)
-clock = Label(font="Times 6 bold")
-clock.place(x=715, y=145)
-timing()
-# web
-weblabel = Label(root, text="Наш телеграмм-канал", font="Times 6 bold underline")
-weblabel.place(x=600, y=195 )
-weblabel.bind("<Button-1>", callback)
-# telegramm bot
-botlabel = Label(root, text="Телеграмм-бот", font="Times 6 bold underline")
-botlabel.place(x=670, y=285)
-botlabel.bind("<Button-1>", telegrammbot)
+# Маг урон от вещей
+equipmentMagicDamageEntry = Entry(width = 5, justify = CENTER, bd =5)
+equipmentMagicDamageEntry.insert(0, "0")
+equipmentMagicDamageEntry.place(x=800, y=1585)
+# Усиление магии от рун и вещей
+amplifyMagicEntry= Entry(width=5, justify = CENTER, bd = 5)
+amplifyMagicEntry.insert(0,"0")
+amplifyMagicEntry.place(x=800, y=1660)
+# Кнопки Защиты
+saveFont = "Times 5"
+# Защита от оглушения
+stunLabel = Label(text="Защита от оглушения:", font= saveFont)
+stunLabel.place(x=550, y=100)
+# Защита от ослепления
+blindnessLabel = Label(text="Защита от ослепления:", font= saveFont)
+blindnessLabel.place(x=550, y=135)
+# Защита от отравления
+poisoningLabel = Label(text="Защита от отравления:", font= saveFont)
+poisoningLabel.place(x=550, y= 170)
+# Защита от оледенения
+glaciationLabel = Label(text="Защита от оледенения:", font= saveFont)
+glaciationLabel.place(x=550, y=205)
+# Защита от окаменения
+petrificationLabel = Label(text="Защита от окаменения:", font= saveFont)
+petrificationLabel.place(x=550, y=240)
+# Защита от ожога
+burnLabel = Label(text="Защита от ожога:", font = saveFont)
+burnLabel.place(x=550, y=275)
+# Защита от кровотечения
+bleedingLabel = Label(text="Защита от кровотечения:", font= saveFont)
+bleedingLabel.place(x=550, y= 310)
+# Защита от немоты
+dumbnessLabel = Label(text="Защита от немоты:", font= saveFont)
+dumbnessLabel.place(x=550, y=345)
+# Защита от проклятия
+curseLabel = Label(text="Защита от проклятия:", font= saveFont)
+curseLabel.place(x=550, y=380)
 #******
 endCode = time.time()
 speedCode = (endCode - startCode)
 speedCode = format(speedCode, '.5f')
 labelTime = Label(text=f"Скорость обработки данных: {speedCode} сек.", font="arial 6 underline")
 labelTime.place(x=20, y=2050)
-#*******
 #*******
 root.mainloop()
