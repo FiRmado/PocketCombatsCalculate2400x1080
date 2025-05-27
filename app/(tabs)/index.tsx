@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import { View, ScrollView, StyleSheet, ImageBackground } from 'react-native';
 import { TextInput, Button, Text, RadioButton } from 'react-native-paper';
+import { useFonts, Cinzel_700Bold } from '@expo-google-fonts/cinzel';
+import { Merriweather_400Regular } from '@expo-google-fonts/merriweather';
 
 export default function AttributesScreen() {
+  const [fontsLoaded] = useFonts({
+    'Cinzel-Bold': Cinzel_700Bold,
+    'Merriweather': Merriweather_400Regular,
+  });
+
   const [level, setLevel] = useState('1');
   const [characterClass, setCharacterClass] = useState('mage');
   const [attributes, setAttributes] = useState({
@@ -34,7 +41,6 @@ export default function AttributesScreen() {
     let hp = 35 + lvl * 5;
     let mana = 0;
     
-    // HP calculation based on class
     if (characterClass === 'mage') {
       for (let i = 2; i <= lvl; i++) {
         hp += Math.floor(i * 0.3);
@@ -47,7 +53,6 @@ export default function AttributesScreen() {
     
     hp += Math.floor((hp * end) / 100);
     
-    // Mana calculation
     const manaCoef = (100 + wis) / 100;
     if (characterClass === 'mage') {
       mana = Math.floor((8 + lvl * (lvl <= 70 ? 5 : 7)) * manaCoef);
@@ -58,80 +63,134 @@ export default function AttributesScreen() {
     return { hp, mana };
   };
 
+  if (!fontsLoaded) {
+    return null;
+  }
+
   const stats = calculateStats();
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.title}>PocketCombats Calculator</Text>
-      
-      <TextInput
-        label="Level"
-        value={level}
-        onChangeText={setLevel}
-        keyboardType="numeric"
-        style={styles.input}
-        mode="outlined"
-      />
+    <ImageBackground 
+      source={{ uri: 'https://images.pexels.com/photos/3832623/pexels-photo-3832623.jpeg' }}
+      style={styles.container}
+    >
+      <ScrollView style={styles.scrollView}>
+        <View style={styles.content}>
+          <Text style={styles.title}>Character Builder</Text>
+          
+          <View style={styles.card}>
+            <TextInput
+              label="Level"
+              value={level}
+              onChangeText={setLevel}
+              keyboardType="numeric"
+              style={styles.input}
+              mode="outlined"
+              theme={{ colors: { primary: '#d4af37' }}}
+            />
 
-      <RadioButton.Group onValueChange={value => setCharacterClass(value)} value={characterClass}>
-        <View style={styles.radioGroup}>
-          <RadioButton.Item label="Mage" value="mage" />
-          <RadioButton.Item label="Warrior" value="warrior" />
-          <RadioButton.Item label="Hunter" value="hunter" />
-          <RadioButton.Item label="Newbie" value="newbie" />
+            <Text style={styles.sectionTitle}>Class Selection</Text>
+            <RadioButton.Group onValueChange={value => setCharacterClass(value)} value={characterClass}>
+              <View style={styles.radioGroup}>
+                <RadioButton.Item 
+                  label="Mage" 
+                  value="mage" 
+                  labelStyle={styles.radioLabel}
+                  color="#d4af37"
+                />
+                <RadioButton.Item 
+                  label="Warrior" 
+                  value="warrior" 
+                  labelStyle={styles.radioLabel}
+                  color="#d4af37"
+                />
+              </View>
+            </RadioButton.Group>
+
+            <View style={styles.statsContainer}>
+              <Text style={styles.statsText}>Available Attributes: {calculateAttributes()}</Text>
+              <Text style={styles.statsText}>HP: {stats.hp}</Text>
+              <Text style={styles.statsText}>Mana: {stats.mana}</Text>
+            </View>
+
+            <Text style={styles.sectionTitle}>Attributes</Text>
+            {Object.entries(attributes).map(([attr, value]) => (
+              <TextInput
+                key={attr}
+                label={attr.charAt(0).toUpperCase() + attr.slice(1)}
+                value={value}
+                onChangeText={(text) => setAttributes(prev => ({ ...prev, [attr]: text }))}
+                keyboardType="numeric"
+                style={styles.input}
+                mode="outlined"
+                theme={{ colors: { primary: '#d4af37' }}}
+              />
+            ))}
+          </View>
         </View>
-      </RadioButton.Group>
-
-      <View style={styles.statsContainer}>
-        <Text style={styles.statsText}>Available Attributes: {calculateAttributes()}</Text>
-        <Text style={styles.statsText}>HP: {stats.hp}</Text>
-        <Text style={styles.statsText}>Mana: {stats.mana}</Text>
-      </View>
-
-      {Object.entries(attributes).map(([attr, value]) => (
-        <TextInput
-          key={attr}
-          label={attr.charAt(0).toUpperCase() + attr.slice(1)}
-          value={value}
-          onChangeText={(text) => setAttributes(prev => ({ ...prev, [attr]: text }))}
-          keyboardType="numeric"
-          style={styles.input}
-          mode="outlined"
-        />
-      ))}
-    </ScrollView>
+      </ScrollView>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  scrollView: {
+    flex: 1,
+  },
+  content: {
     padding: 16,
-    backgroundColor: '#f5f5f5',
   },
   title: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: 32,
+    fontFamily: 'Cinzel-Bold',
+    color: '#ffffff',
     textAlign: 'center',
-    marginVertical: 16,
+    marginVertical: 24,
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 4,
+  },
+  card: {
+    backgroundColor: 'rgba(25, 25, 25, 0.9)',
+    borderRadius: 12,
+    padding: 20,
+    marginBottom: 20,
   },
   input: {
     marginBottom: 12,
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    fontFamily: 'Merriweather',
   },
   radioGroup: {
     marginVertical: 12,
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
     borderRadius: 8,
   },
+  radioLabel: {
+    color: '#ffffff',
+    fontFamily: 'Merriweather',
+  },
   statsContainer: {
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
     padding: 16,
     borderRadius: 8,
     marginBottom: 16,
+    borderWidth: 1,
+    borderColor: '#d4af37',
   },
   statsText: {
     fontSize: 16,
     marginBottom: 8,
+    color: '#ffffff',
+    fontFamily: 'Merriweather',
+  },
+  sectionTitle: {
+    fontSize: 20,
+    color: '#d4af37',
+    fontFamily: 'Cinzel-Bold',
+    marginVertical: 16,
   },
 });
